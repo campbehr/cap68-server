@@ -12,8 +12,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Signup Route
+app.get("/", (req, res) => res.send("Hello CAP68"));
 
-app.post("/", (req, res) => {
+app.post("/signup", (req, res) => {
   const {
     airline,
     base,
