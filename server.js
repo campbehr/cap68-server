@@ -1,6 +1,6 @@
 const express = require("express");
 const fetch = require("node-fetch");
-const { post_user, auth, port } = require("./config");
+// const { post_user, auth, port } = require("./config");
 const cors = require("cors");
 
 const app = express();
@@ -66,10 +66,10 @@ app.post("/signup", (req, res) => {
 
   const postData = JSON.stringify(data);
 
-  fetch(post_user, {
+  fetch(process.env.MAILCHIMP_URL_POST, {
     method: "POST",
     headers: {
-      Authorization: auth,
+      Authorization: process.env.MAILCHIMP_AUTH,
     },
     body: postData,
   })
@@ -77,4 +77,7 @@ app.post("/signup", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.listen(port, console.log(`Server started on ${port}`));
+app.listen(
+  process.env.PORT,
+  console.log(`Server started on ${process.env.PORT}`)
+);
